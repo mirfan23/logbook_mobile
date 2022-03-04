@@ -1,0 +1,33 @@
+name: logbook_mobile_app
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.16.1 <3.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  get: 4.6.1
+  dropdown_search: ^0.6.1
+  table_calendar: ^3.0.4
+  intl: ^0.17.0
+  flutter_slidable: ^1.2.0
+  change_notifier: ^0.24.0
+  flutter: 
+    sdk: flutter
+
+dev_dependencies: 
+  flutter_lints: ^1.0.0
+  lints: 1.0.1
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  assets:
+     - assets/images/kosong.png
+  uses-material-design: true
+  fonts:
+  - family : Kanit
+    fonts: 
+      - asset: fonts\Kanit-Regular.ttf
+
