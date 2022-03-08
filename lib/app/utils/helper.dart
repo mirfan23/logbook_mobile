@@ -8,11 +8,14 @@ class MyHelper {
   static final Myappbar = AppBar(
     title: Text('Akivitasku'),
     centerTitle: true,
-    leading: Icon(Icons.menu),
+    // leading: Icon(Icons.menu),
     actions: [
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: Icon(Icons.filter_1),
+        child: Image(
+            height: 25,
+            width: 25,
+            image: AssetImage("assets/icons/filter.png")),
       )
     ],
   );

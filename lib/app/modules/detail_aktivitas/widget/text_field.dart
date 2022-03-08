@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:logbook_mobile_app/app/modules/detail_aktivitas/controllers/detail_aktivitas_controller.dart';
 import '../../values/colors.dart';
 
-class CustomTextFieldWidget extends StatelessWidget {
+class CustomTextFieldWidget extends GetView<DetailAktivitasController> {
   const CustomTextFieldWidget({
     Key? key,
     // required this.controller,
@@ -15,7 +16,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      // controller: realita,
+      controller: controller.realitacontroller,
       decoration: InputDecoration(
           filled: true,
           focusedBorder: OutlineInputBorder(

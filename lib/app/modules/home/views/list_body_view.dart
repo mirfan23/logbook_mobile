@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
@@ -22,6 +24,9 @@ class Aktivitas extends StatelessWidget {
     // List<Widget> myListWidget =
     //     List.generate(10, (index) => SlidableWidget(controller: controller));
     return Obx(() {
+      final listData = controller
+          .getByDate(controller.formatDate(controller.selectedDay.value));
+      // print(controller.selectedDay);
       return controller.listAktivitas.isEmpty
           ? Container(
               width: deviceWidth,
@@ -31,11 +36,10 @@ class Aktivitas extends StatelessWidget {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                final listData = controller.listAktivitas[index];
                 return SlidableWidget(
                   controller: controller,
                   index: index,
-                  data: listData,
+                  data: listData[index],
                 );
               },
               separatorBuilder: (context, index) {
@@ -43,7 +47,7 @@ class Aktivitas extends StatelessWidget {
                   height: 10,
                 );
               },
-              itemCount: controller.listAktivitas.length);
+              itemCount: listData.length);
     });
   }
 }

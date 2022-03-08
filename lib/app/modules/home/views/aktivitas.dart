@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:logbook_mobile_app/app/modules/home/controllers/home_controller.dart';
 
 import '../../values/colors.dart';
 
-class AktivitasBody extends StatelessWidget {
+class AktivitasBody extends GetView<HomeController> {
   const AktivitasBody({
     Key? key,
     required this.deviceWidth,
@@ -22,11 +24,15 @@ class AktivitasBody extends StatelessWidget {
           SizedBox(
             width: 8.0,
           ),
-          Text("0",
-              style: TextStyle(
-                  color: MyColors.amber,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18)),
+          Obx(() {
+            final listData = controller
+                .getByDate(controller.formatDate(controller.selectedDay.value));
+            return Text(listData.length.toString(),
+                style: TextStyle(
+                    color: MyColors.amber,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18));
+          })
         ],
       ),
     );

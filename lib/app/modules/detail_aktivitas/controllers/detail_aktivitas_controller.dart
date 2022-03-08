@@ -1,5 +1,6 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, unnecessary_null_comparison
 
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:logbook_mobile_app/app/modules/home/home_model.dart';
 
@@ -35,9 +36,21 @@ class DetailAktivitasController extends GetxController with StateMixin {
     "Testing",
   ].obs;
 
+  late TextEditingController judulcontroller;
+  late TextEditingController realitacontroller;
+  late String kategoricontroller;
+  late String subaktivitascontroller;
+  late String waktucontroller;
+
   @override
   void onInit() {
     super.onInit();
+    judulcontroller = TextEditingController();
+    realitacontroller = TextEditingController();
+    kategoricontroller = "";
+    subaktivitascontroller = "";
+    waktucontroller = "";
+
     var subAktivitas1 = DetailAktivitasModel(status: false, tittle: "Analisis");
     var subAktivitas2 =
         DetailAktivitasModel(status: false, tittle: "Wireframe");
@@ -86,49 +99,64 @@ class DetailAktivitasController extends GetxController with StateMixin {
   void stateSubAktivitas(DetailAktivitasModel data) {
     dataCheck = data.status.obs;
     dataCheck.toggle();
+    if (dataCheck.isTrue) {
+      subaktivitascontroller = data.tittle.toString();
+    }
     data.status = dataCheck.value;
     print(data.tittle + " = " + data.status.toString());
     change(dataCheck.value, status: RxStatus.success());
   }
 
-  void changeTargetToggle() {
-    onTarget.toggle();
-    print("onTarget : " + onTarget.toString());
-  }
+  // void changeTargetToggle() {
+  //   onTarget.toggle();
+  //   print("onTarget : " + onTarget.toString());
+  // }
 
   void changeConceptState() {
     onConcept.toggle();
-    // onKategoriSelected = "Concept" as RxString;
-    print("onConcept : " + onConcept.toString());
+    if (onConcept.isTrue) {
+      kategoricontroller = "Concept";
+      print("onConcept : " + onConcept.toString());
+    }
   }
 
   void changeDesignState() {
     onDesign.toggle();
-    // onKategoriSelected = "Design" as RxString;
-    print("onDesign : " + onDesign.toString());
+    if (onDesign.isTrue) {
+      kategoricontroller = "Design";
+      print("onDesign : " + onDesign.toString());
+    }
   }
 
   void changeDiscussState() {
     onDiscuss.toggle();
-    // onKategoriSelected = "Discuss" as RxString;
-    print("onDiscuss : " + onDiscuss.toString());
+    if (onDiscuss.isTrue) {
+      kategoricontroller = "Discuss";
+      print("onDiscuss : " + onDiscuss.toString());
+    }
   }
 
   void changeLearntState() {
     onLearn.toggle();
-    // onKategoriSelected = "Learn" as RxString;
-    print("onLearn : " + onLearn.toString());
+    if (onLearn.isTrue) {
+      kategoricontroller = "Learn";
+      print("onLearn : " + onLearn.toString());
+    }
   }
 
   void changeReportState() {
     onReport.toggle();
-    // onKategoriSelected = "Report" as RxString;
-    print("onReport : " + onReport.toString());
+    if (onReport.isTrue) {
+      kategoricontroller = "Report";
+      print("onReport : " + onReport.toString());
+    }
   }
 
   void changeOtherState() {
     onOther.toggle();
-    // onKategoriSelected = "Other" as RxString;
-    print("onOther : " + onOther.toString());
+    if (onOther.isTrue) {
+      kategoricontroller = "Other";
+      print("onOther : " + onOther.toString());
+    }
   }
 }

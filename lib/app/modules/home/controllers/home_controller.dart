@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../home_model.dart';
@@ -11,7 +12,7 @@ class HomeController extends GetxController with StateMixin {
 
   DateTime focusedDay = DateTime.now();
   CalendarFormat calendarFormat = CalendarFormat.month;
-  DateTime? selectedDay;
+  var selectedDay = DateTime.now().obs;
 
   final firstDate = DateTime(2010, 1);
   final lastDate = DateTime(2022, 12);
@@ -30,6 +31,11 @@ class HomeController extends GetxController with StateMixin {
     change(statusCheck.value, status: RxStatus.success());
   }
 
+  String formatDate(DateTime date) {
+    var formatDate = DateFormat("EEEE, d MMMM yyyy");
+    return formatDate.format(date);
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -42,7 +48,7 @@ class HomeController extends GetxController with StateMixin {
         kategori: "Design",
         subaktivitas: "Analisis",
         waktu: "Sebelum Dzuhur",
-        tanggal: "Sabtu, 25 Februari 2022");
+        tanggal: "Saturday, 5 March 2022");
     var aktivitas2 = Homepage(
         id: "0",
         status: false,
@@ -66,5 +72,9 @@ class HomeController extends GetxController with StateMixin {
     listAktivitas.add(aktivitas);
     listAktivitas.add(aktivitas2);
     listAktivitas.add(aktivitas3);
+  }
+
+  List<Homepage> getByDate(String date) {
+    return listAktivitas.where((element) => element.tanggal == date).toList();
   }
 }

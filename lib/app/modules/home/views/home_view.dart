@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logbook_mobile_app/app/modules/home/views/bulan_view.dart';
@@ -5,6 +7,7 @@ import 'package:logbook_mobile_app/app/utils/helper.dart';
 import '../../../routes/app_pages.dart';
 import '../../values/colors.dart';
 import '../controllers/home_controller.dart';
+import 'drawer.dart';
 
 class HomeView extends GetView<HomeController> {
   @override
@@ -14,9 +17,10 @@ class HomeView extends GetView<HomeController> {
     final bodyHeight = deviceHeight - MyHelper.Myappbar.preferredSize.height;
     return Scaffold(
         appBar: MyHelper.Myappbar,
+        drawer: MyDrawer(),
         body: BulanView(),
         bottomNavigationBar: Padding(
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.all(10),
           child: MaterialButton(
               height: bodyHeight * 0.1,
               color: MyColors.blue,

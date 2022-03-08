@@ -3,13 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:logbook_mobile_app/app/modules/home/views/list_body_view.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../../../routes/app_pages.dart';
-import '../../../utils/helper.dart';
-import '../../values/colors.dart';
 import '../controllers/home_controller.dart';
-import 'package:get/get.dart';
-
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'aktivitas.dart';
@@ -68,12 +62,12 @@ class _ShowCalendarState extends State<ShowCalendar> {
       lastDay: controller.lastDate,
       calendarFormat: controller.calendarFormat,
       selectedDayPredicate: (day) {
-        return isSameDay(controller.selectedDay, day);
+        return isSameDay(controller.selectedDay.value, day);
       },
       onDaySelected: (selectedDay, focusedDay) {
-        if (!isSameDay(controller.selectedDay, focusedDay)) {
+        if (!isSameDay(controller.selectedDay.value, focusedDay)) {
           setState(() {
-            controller.selectedDay = selectedDay;
+            controller.selectedDay.value = selectedDay;
             controller.focusedDay;
           });
         }

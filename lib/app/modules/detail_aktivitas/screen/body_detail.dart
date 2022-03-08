@@ -90,7 +90,7 @@ class BodyDetailAktivitas extends StatelessWidget {
                 selectedItem: "Pilih waktu...",
                 hint: "Pilih waktu...",
                 onChanged: (value) {
-                  // controller.onWaktuSelected.value = value!;
+                  controller.waktucontroller = value.toString();
                 },
                 showAsSuffixIcons: false,
                 dropdownSearchDecoration: InputDecoration(
