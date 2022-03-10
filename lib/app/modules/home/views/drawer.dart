@@ -26,8 +26,8 @@ class MyDrawer extends StatelessWidget {
             children: [
               Image(
                 image: AssetImage("assets/icons/waktu.png"),
-                height: 25,
-                width: 25,
+                height: 35,
+                width: 35,
               ),
               SizedBox(
                 width: 10,

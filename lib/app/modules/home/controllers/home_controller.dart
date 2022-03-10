@@ -4,36 +4,45 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../home_model.dart';
 
-class HomeController extends GetxController with StateMixin {
-  var isCalendarDropdown = true.obs;
-  var stateViewDate = false.obs;
-  var stateAktivitasValue = false.obs;
+class HomeController extends GetxController {
   var listAktivitas = List<Homepage>.empty().obs;
+  var listData = List<Homepage>.empty().obs;
 
   DateTime focusedDay = DateTime.now();
   CalendarFormat calendarFormat = CalendarFormat.month;
   var selectedDay = DateTime.now().obs;
-
   final firstDate = DateTime(2010, 1);
   final lastDate = DateTime(2022, 12);
-
-  // void changeDateView() {
-  //   stateViewDate.toggle();
-  // }
-
-  RxBool statusCheck = false.obs;
+  var statusCheck = true.obs;
+  // var statuscek = false.obs;
 
   void stateAktivitas(Homepage data) {
-    statusCheck = data.status.obs;
+    statusCheck.value = data.status;
     statusCheck.toggle();
     data.status = statusCheck.value;
     print(data.target.toString() + " = " + data.status.toString());
-    change(statusCheck.value, status: RxStatus.success());
+    // change(statusCheck.value, status: RxStatus.success());
+  }
+
+  void deleteAktivitas(String id) {
+    listAktivitas.removeWhere((element) => element.id == id);
+    listData.removeWhere((element) => element.id == id);
   }
 
   String formatDate(DateTime date) {
     var formatDate = DateFormat("EEEE, d MMMM yyyy");
     return formatDate.format(date);
+  }
+
+  List<Homepage> getDataByDate(String date) {
+    return listAktivitas.where((element) => element.tanggal == date).toList();
+  }
+
+  List<Homepage> getDataByStatus(bool status, String date) {
+    print(status);
+    return listAktivitas
+        .where((element) => element.status == status && element.tanggal == date)
+        .toList();
   }
 
   @override

@@ -1,33 +1,28 @@
 // ignore_for_file: unused_local_variable
 
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-import 'dart:math' as math;
+import 'package:logbook_mobile_app/app/modules/home/home_model.dart';
 
 import '../../values/colors.dart';
 import '../controllers/home_controller.dart';
-import '../home_model.dart';
 
-class Aktivitas extends StatelessWidget {
+class Aktivitas extends GetView<HomeController> {
   Aktivitas({
     Key? key,
-    required this.deviceWidth,
-    required this.controller,
+    required double deviceWidth,
+    required HomeController controller,
   }) : super(key: key);
-
-  final double deviceWidth;
-  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
-    // List<Widget> myListWidget =
-    //     List.generate(10, (index) => SlidableWidget(controller: controller));
+    final deviceWidth = MediaQuery.of(context).size.width;
     return Obx(() {
-      final listData = controller
-          .getByDate(controller.formatDate(controller.selectedDay.value));
-      // print(controller.selectedDay);
-      return controller.listAktivitas.isEmpty
+      print(controller.listData.length);
+      return controller.listData.isEmpty
           ? Container(
               width: deviceWidth,
               child: Image(image: AssetImage("assets/images/kosong.png")),
@@ -37,9 +32,8 @@ class Aktivitas extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return SlidableWidget(
-                  controller: controller,
-                  index: index,
-                  data: listData[index],
+                  data: controller.listData[index],
+                  indexData: index,
                 );
               },
               separatorBuilder: (context, index) {
@@ -47,99 +41,75 @@ class Aktivitas extends StatelessWidget {
                   height: 10,
                 );
               },
-              itemCount: listData.length);
+              itemCount: controller.listData.length);
     });
   }
 }
 
-class SlidableWidget extends StatelessWidget {
+class SlidableWidget extends GetView<HomeController> {
   SlidableWidget({
-    Key? key,
-    required this.controller,
-    required this.index,
     required this.data,
-  }) : super(key: key);
+    required this.indexData,
+  });
 
-  final HomeController controller;
   final Homepage data;
-  final int index;
+  final int indexData;
 
   @override
   Widget build(BuildContext context) {
     return Slidable(
       endActionPane: ActionPane(motion: ScrollMotion(), children: [
         SlidableAction(
-          onPressed: null,
+          onPressed: (context) {},
           icon: Icons.edit,
           backgroundColor: Colors.amber,
-          // foregroundColor: Colors.amber,
           foregroundColor: Colors.white,
           label: "Edit",
         ),
         SlidableAction(
-          onPressed: null,
+          onPressed: (context) {
+            print(indexData);
+            controller.deleteAktivitas(data.id);
+          },
           icon: Icons.delete,
           backgroundColor: Colors.red,
-          // foregroundColor: Colors.red,
           foregroundColor: Colors.white,
           label: "Delete",
         ),
       ]),
       child: CardListViewWidget(
-        controller: controller,
-        index: index,
         data: data,
       ),
     );
   }
 }
 
-class CardListViewWidget extends StatelessWidget {
+class CardListViewWidget extends GetView<HomeController> {
   CardListViewWidget({
-    Key? key,
-    required this.controller,
-    required this.index,
     required this.data,
-  }) : super(key: key);
-
-  final HomeController controller;
-  final int index;
+  });
   final Homepage data;
 
   @override
   Widget build(BuildContext context) {
-    var tittle = data.target.toString();
-    TextPainter textPainter = TextPainter()
-      ..text = TextSpan(text: tittle)
-      ..textDirection = TextDirection.ltr
-      ..layout(minWidth: 0, maxWidth: double.infinity);
-
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), color: Colors.white),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Container(
-                height: 15,
-                width: 15,
-                decoration: BoxDecoration(
-                  color: MyColors.white2,
-                  borderRadius: BorderRadius.circular(3),
-                ),
-                child: controller.obx(
-                  (value) {
-                    return Checkbox(
-                      onChanged: (state) {
-                        controller.stateAktivitas(data);
-                      },
-                      side: BorderSide.none,
-                      value: data.status,
-                    );
-                  },
-                  onLoading: Checkbox(
+      child: Obx(() {
+        var test = controller.statusCheck.value;
+        return Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  height: 15,
+                  width: 15,
+                  decoration: BoxDecoration(
+                    color: MyColors.white2,
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                  child: Checkbox(
                     onChanged: (state) {
                       controller.stateAktivitas(data);
                     },
@@ -147,74 +117,81 @@ class CardListViewWidget extends StatelessWidget {
                     value: data.status,
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                data.target.toString(),
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: MyColors.darkGrey),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 25.0),
-            child: Column(children: [
-              Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio maecenas ipsum urna, magna risus. Diam facilisis cras.",
-                style: TextStyle(color: MyColors.grey, fontSize: 12),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 1,
-                color: MyColors.blue,
-              )
-            ]),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
+                SizedBox(
+                  width: 10,
                 ),
-                child: Text(
-                  "Sebelum Dzuhur",
+                Text(
+                  data.target.toString(),
                   style: TextStyle(
-                      fontSize: 13,
+                      decoration: data.status
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
                       fontWeight: FontWeight.bold,
-                      color: MyColors.grey),
+                      fontSize: 15,
+                      color: data.status ? MyColors.lightGrey : MyColors.black),
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                decoration: BoxDecoration(
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 25.0),
+              child: Column(children: [
+                Container(
+                  width: double.infinity,
+                  child: Text(
+                    data.realita.toString(),
+                    style: TextStyle(color: MyColors.lightGrey, fontSize: 12),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 1,
+                  color: MyColors.blue,
+                )
+              ]),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color:
-                        MyColors.myListKategoriColor[math.Random().nextInt(3)]),
-                child: Text(
-                  "Disscuss",
-                  style: TextStyle(
+                  ),
+                  child: Text(
+                    data.waktu.toString(),
+                    style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: MyColors.lightGrey),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: MyColors
+                          .myListKategoriColor[math.Random().nextInt(3)]),
+                  child: Text(
+                    data.kategori.toString(),
+                    style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
-                      color: MyColors.grey),
-                ),
-              ),
-            ]),
-          )
-        ],
-      ),
+                      color: MyColors.lightGrey,
+                    ),
+                  ),
+                )
+              ]),
+            )
+          ],
+        );
+      }),
     );
   }
 }

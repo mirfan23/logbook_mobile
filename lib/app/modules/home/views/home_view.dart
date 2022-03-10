@@ -13,10 +13,28 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     final deviceHeight = Get.height;
-    final deviceWidth = Get.width;
-    final bodyHeight = deviceHeight - MyHelper.Myappbar.preferredSize.height;
+    // final deviceWidth = Get.width;
+    final bodyHeight =
+        deviceHeight - MyHelper.myDetailAppBar.preferredSize.height;
     return Scaffold(
-        appBar: MyHelper.Myappbar,
+        appBar: AppBar(
+          title: Text('Akivitasku'),
+          centerTitle: true,
+          actions: [
+            PopupMenuButton<String>(
+              icon: Image(
+                image: AssetImage("assets/icons/filter.png"),
+                height: 25,
+                width: 25,
+              ),
+              onSelected: (item) {
+                onSelected(context, item, controller);
+              },
+              itemBuilder: (context) =>
+                  [...MyHelper.popupmenu.map(buildItem).toList()],
+            )
+          ],
+        ),
         drawer: MyDrawer(),
         body: BulanView(),
         bottomNavigationBar: Padding(
@@ -31,4 +49,34 @@ class HomeView extends GetView<HomeController> {
                   style: TextStyle(color: MyColors.white, fontSize: 20))),
         ));
   }
+}
+
+void onSelected(BuildContext context, String item, HomeController controller) {
+  switch (item) {
+    case "Aktivitas Tertunda":
+      controller.listData.value = controller.getDataByStatus(
+          false, controller.formatDate(controller.selectedDay.value));
+      print(item);
+      break;
+    case "Aktivitas Selesai":
+      controller.listData.value = controller.getDataByStatus(
+          true, controller.formatDate(controller.selectedDay.value));
+      print(controller.selectedDay.toString());
+      print(item);
+      break;
+    case "Semua Aktivitas":
+      controller.listData.value = controller
+          .getDataByDate(controller.formatDate(controller.selectedDay.value));
+      print(item);
+      break;
+  }
+}
+
+PopupMenuItem<String> buildItem(String e) {
+  return PopupMenuItem(
+      value: e,
+      child: Text(
+        e,
+        style: TextStyle(color: MyColors.black),
+      ));
 }

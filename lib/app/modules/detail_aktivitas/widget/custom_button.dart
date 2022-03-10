@@ -27,7 +27,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MyHelper.Myappbar.preferredSize.height * 0.8,
+      height: MyHelper.myDetailAppBar.preferredSize.height * 0.8,
       margin: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
           color: color, borderRadius: BorderRadius.circular(borderRadius!)),

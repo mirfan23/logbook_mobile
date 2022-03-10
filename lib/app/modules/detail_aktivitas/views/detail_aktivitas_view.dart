@@ -41,6 +41,7 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
               waktu: controller.waktucontroller,
               tanggal: HomeC.formatDate(controller.initialDate.value));
           HomeC.listAktivitas.add(aktivtas);
+          HomeC.listData.add(aktivtas);
           Get.back();
         },
       ),

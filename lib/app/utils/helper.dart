@@ -1,24 +1,14 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-
 import '../modules/values/colors.dart';
 
 class MyHelper {
-  static final Myappbar = AppBar(
-    title: Text('Akivitasku'),
-    centerTitle: true,
-    // leading: Icon(Icons.menu),
-    actions: [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: Image(
-            height: 25,
-            width: 25,
-            image: AssetImage("assets/icons/filter.png")),
-      )
-    ],
-  );
+  static var popupmenu = [
+    "Aktivitas Tertunda",
+    "Aktivitas Selesai",
+    "Semua Aktivitas",
+  ];
 
   static final DetailAppbar = AppBar(
     title: Text(
@@ -27,7 +17,7 @@ class MyHelper {
           color: MyColors.darkGrey, fontSize: 20, fontWeight: FontWeight.w500),
     ),
     iconTheme: IconThemeData(
-      color: MyColors.darkGrey, //change your color here
+      color: MyColors.darkGrey,
     ),
     centerTitle: false,
     backgroundColor: Colors.transparent,
@@ -41,7 +31,7 @@ class MyHelper {
           color: MyColors.darkGrey, fontSize: 20, fontWeight: FontWeight.w500),
     ),
     iconTheme: IconThemeData(
-      color: MyColors.darkGrey, //change your color here
+      color: MyColors.darkGrey,
     ),
     centerTitle: false,
     backgroundColor: Colors.transparent,
