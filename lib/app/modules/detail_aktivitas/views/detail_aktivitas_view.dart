@@ -1,10 +1,9 @@
-// ignore_for_file: must_be_immutable, non_constant_identifier_names
+// ignore_for_file: must_be_immutable, non_constant_identifier_names, prefer_adjacent_string_concatenation
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:logbook_mobile_app/app/modules/home/controllers/home_controller.dart';
-import 'package:logbook_mobile_app/app/modules/home/home_model.dart';
 
 import '../../../utils/helper.dart';
 import '../../values/colors.dart';

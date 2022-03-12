@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:logbook_mobile_app/app/modules/values/colors.dart';
 
 import '../controllers/detail_aktivitas_controller.dart';
-import '../views/kategori_button.dart';
 
 class ListKategori extends GetView<DetailAktivitasController> {
   @override
