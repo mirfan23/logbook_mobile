@@ -59,12 +59,14 @@ class MyDrawer extends StatelessWidget {
         ),
         Spacer(),
         ListTile(
-          // Get.toNamed("logout");
+          onTap: (() {
+            // Get.toNamed("logout");
+          }),
           leading: Icon(
             Icons.logout,
             size: 20,
           ),
-          title: Text("Keluar", style: TextStyle(fontSize: 14)),
+          title: Text("Keluar", style: TextStyle(fontSize: 16)),
         )
       ]),
     );

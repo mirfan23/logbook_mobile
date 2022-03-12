@@ -13,7 +13,8 @@ import '../screen/body_detail.dart';
 import '../widget/custom_button.dart';
 
 class DetailAktivitasView extends GetView<DetailAktivitasController> {
-  var HomeC = Get.put(HomeController());
+  final homepageC = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,24 +26,20 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
         borderRadius: 5,
         textColor: MyColors.white,
         onPressed: () {
-          print(controller.judulcontroller.text);
-          print(controller.realitacontroller.text);
-          print(controller.kategoricontroller);
-          print(controller.subaktivitascontroller);
-          print(controller.waktucontroller);
-          print(HomeC.formatDate(controller.initialDate.value));
-          var aktivtas = Homepage(
-              id: (HomeC.listAktivitas.length + 1).toString(),
-              status: false,
-              target: controller.judulcontroller.text,
-              realita: controller.realitacontroller.text,
-              kategori: controller.kategoricontroller,
-              subaktivitas: controller.subaktivitascontroller,
-              waktu: controller.waktucontroller,
-              tanggal: HomeC.formatDate(controller.initialDate.value));
-          HomeC.listAktivitas.add(aktivtas);
-          HomeC.listData.add(aktivtas);
-          Get.back();
+          print("Id = ${(homepageC.listAktivitas.length + 1).toString()}\n" +
+              "Status = false\n" +
+              "Target = ${controller.judulcontroller.text}\n" +
+              "Realita = ${controller.realitacontroller.text}\n" +
+              "Kategori = ${controller.kategoricontroller.toString()}\n" +
+              "Sub-Aktivitas = ${controller.subaktivitascontroller}\n" +
+              "Waktu = ${controller.waktucontroller.toString()}\n" +
+              "Tanggal = ${controller.formatDate(controller.initialDate.value).toString()}\n===========================");
+          if (controller.checkValueIsValid()) {
+            controller.addAktivitas();
+            Get.back();
+          } else {
+            print("Data harus terisi semua!");
+          }
         },
       ),
       body: BodyDetailAktivitas(

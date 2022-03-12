@@ -2,16 +2,21 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:logbook_mobile_app/app/modules/home/controllers/home_controller.dart';
 import 'package:logbook_mobile_app/app/modules/home/home_model.dart';
 
+import '../../home/provider/home_provider.dart';
 import '../detail_aktivitas_model.dart';
 
 class DetailAktivitasController extends GetxController with StateMixin {
   var listSubAktivitas = List<DetailAktivitasModel>.empty().obs;
   var listAktivitas = List<Homepage>.empty().obs;
+  var homepageC = Get.put(HomeController());
 
   RxBool listCheckSubAktivitas = false.obs;
-  var statusSelected = false.obs;
+  RxBool statusSelected = false.obs;
+  RxInt selectedKategori = 0.obs;
 
   Rx<DateTime> initialDate = DateTime.now().obs;
   Rx<DateTime> firstDate = DateTime(2000).obs;
@@ -28,6 +33,8 @@ class DetailAktivitasController extends GetxController with StateMixin {
   // RxString onKategoriSelected = "".obs;
   // RxString onWaktuSelected = "".obs;
 
+  HomeProvider dsds = Get.put(HomeProvider());
+
   List<String> myListSubAktivitas = [
     "Analisis",
     "Wireframe",
@@ -35,6 +42,15 @@ class DetailAktivitasController extends GetxController with StateMixin {
     "Prototyping",
     "Testing",
   ].obs;
+
+  final List<String> listKategori = [
+    "Concept",
+    "Design",
+    "Discuss",
+    "Learn",
+    "Report",
+    "Other",
+  ];
 
   late TextEditingController judulcontroller;
   late TextEditingController realitacontroller;
@@ -82,19 +98,34 @@ class DetailAktivitasController extends GetxController with StateMixin {
     listSubAktivitas.add(subAktivitas);
   }
 
-  // void addAktivitas(String target, String realita, String kategori,
-  //     String waktu, String tanggal) {
-  //   var aktivitas = Homepage(
-  //       id: target,
-  //       status: false,
-  //       target: target,
-  //       realita: realita,
-  //       kategori: kategori,
-  //       subaktivitas: "subAktivitas",
-  //       waktu: waktu,
-  //       tanggal: tanggal);
-  //   listAktivitas.add(aktivitas);
-  // }
+  String formatDate(DateTime date) {
+    var formatDate = DateFormat("EEEE, d MMMM yyyy", "id_ID");
+    return formatDate.format(date);
+  }
+
+  void addAktivitas() {
+    var aktivitas = Homepage(
+        id: (homepageC.listAktivitas.length + 1).toString(),
+        status: false,
+        target: judulcontroller.text,
+        realita: realitacontroller.text,
+        kategori: kategoricontroller.toString(),
+        subaktivitas: subaktivitascontroller.toString(),
+        waktu: waktucontroller.toString(),
+        tanggal: formatDate(initialDate.value).toString());
+    homepageC.listAktivitas.add(aktivitas);
+    homepageC.listData.value =
+        homepageC.getDataByDate(formatDate(homepageC.selectedDay.value));
+  }
+
+  bool checkValueIsValid() {
+    return judulcontroller.text.isNotEmpty &&
+        realitacontroller.text.isNotEmpty &&
+        kategoricontroller.toString().isNotEmpty &&
+        subaktivitascontroller.toString().isNotEmpty &&
+        waktucontroller.toString().isNotEmpty &&
+        formatDate(initialDate.value).toString().isNotEmpty;
+  }
 
   void stateSubAktivitas(DetailAktivitasModel data) {
     dataCheck = data.status.obs;
@@ -112,51 +143,51 @@ class DetailAktivitasController extends GetxController with StateMixin {
   //   print("onTarget : " + onTarget.toString());
   // }
 
-  void changeConceptState() {
-    onConcept.toggle();
-    if (onConcept.isTrue) {
-      kategoricontroller = "Concept";
-      print("onConcept : " + onConcept.toString());
-    }
-  }
+  // void changeConceptState() {
+  //   onConcept.toggle();
+  //   if (onConcept.isTrue) {
+  //     kategoricontroller = "Concept";
+  //     print("onConcept : " + onConcept.toString());
+  //   }
+  // }
 
-  void changeDesignState() {
-    onDesign.toggle();
-    if (onDesign.isTrue) {
-      kategoricontroller = "Design";
-      print("onDesign : " + onDesign.toString());
-    }
-  }
+  // void changeDesignState() {
+  //   onDesign.toggle();
+  //   if (onDesign.isTrue) {
+  //     kategoricontroller = "Design";
+  //     print("onDesign : " + onDesign.toString());
+  //   }
+  // }
 
-  void changeDiscussState() {
-    onDiscuss.toggle();
-    if (onDiscuss.isTrue) {
-      kategoricontroller = "Discuss";
-      print("onDiscuss : " + onDiscuss.toString());
-    }
-  }
+  // void changeDiscussState() {
+  //   onDiscuss.toggle();
+  //   if (onDiscuss.isTrue) {
+  //     kategoricontroller = "Discuss";
+  //     print("onDiscuss : " + onDiscuss.toString());
+  //   }
+  // }
 
-  void changeLearntState() {
-    onLearn.toggle();
-    if (onLearn.isTrue) {
-      kategoricontroller = "Learn";
-      print("onLearn : " + onLearn.toString());
-    }
-  }
+  // void changeLearntState() {
+  //   onLearn.toggle();
+  //   if (onLearn.isTrue) {
+  //     kategoricontroller = "Learn";
+  //     print("onLearn : " + onLearn.toString());
+  //   }
+  // }
 
-  void changeReportState() {
-    onReport.toggle();
-    if (onReport.isTrue) {
-      kategoricontroller = "Report";
-      print("onReport : " + onReport.toString());
-    }
-  }
+  // void changeReportState() {
+  //   onReport.toggle();
+  //   if (onReport.isTrue) {
+  //     kategoricontroller = "Report";
+  //     print("onReport : " + onReport.toString());
+  //   }
+  // }
 
-  void changeOtherState() {
-    onOther.toggle();
-    if (onOther.isTrue) {
-      kategoricontroller = "Other";
-      print("onOther : " + onOther.toString());
-    }
-  }
+  // void changeOtherState() {
+  //   onOther.toggle();
+  //   if (onOther.isTrue) {
+  //     kategoricontroller = "Other";
+  //     print("onOther : " + onOther.toString());
+  //   }
+  // }
 }

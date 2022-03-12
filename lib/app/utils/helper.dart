@@ -10,7 +10,7 @@ class MyHelper {
     "Semua Aktivitas",
   ];
 
-  static final DetailAppbar = AppBar(
+  static final myDetailAppBar = AppBar(
     title: Text(
       'Detail Aktivitas',
       style: TextStyle(
@@ -24,17 +24,8 @@ class MyHelper {
     elevation: 0,
   );
 
-  static final myDetailAppBar = AppBar(
-    title: Text(
-      'Detail Aktivitas',
-      style: TextStyle(
-          color: MyColors.darkGrey, fontSize: 20, fontWeight: FontWeight.w500),
-    ),
-    iconTheme: IconThemeData(
-      color: MyColors.darkGrey,
-    ),
-    centerTitle: false,
-    backgroundColor: Colors.transparent,
-    elevation: 0,
+  static final kategoriappbar = AppBar(
+    title: Text('Kategori'),
+    centerTitle: true,
   );
 }

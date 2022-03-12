@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../values/colors.dart';
 import '../controllers/detail_aktivitas_controller.dart';
 
@@ -28,20 +27,20 @@ class CustomKategoriCheckButton extends GetView<DetailAktivitasController> {
                   onPressed: onPress,
                   style: ElevatedButton.styleFrom(
                       side: BorderSide(color: MyColors.blue),
-                      shadowColor: Colors.white,
+                      shadowColor: MyColors.white,
                       primary: MyColors.blue),
                   child: Text(
                     text!,
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
+                        fontWeight: FontWeight.bold, color: MyColors.white),
                   ),
                 )
               : ElevatedButton(
                   onPressed: onPress,
                   style: ElevatedButton.styleFrom(
                       side: BorderSide(color: MyColors.blue),
-                      shadowColor: Colors.white,
-                      primary: Colors.white),
+                      shadowColor: MyColors.white,
+                      primary: MyColors.white),
                   child: Text(
                     text!,
                     style: TextStyle(

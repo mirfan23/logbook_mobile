@@ -3,8 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../home_model.dart';
+import '../post_aktivitas.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController with StateMixin<Postaktivitas> {
   var listAktivitas = List<Homepage>.empty().obs;
   var listData = List<Homepage>.empty().obs;
 
@@ -14,7 +15,6 @@ class HomeController extends GetxController {
   final firstDate = DateTime(2010, 1);
   final lastDate = DateTime(2022, 12);
   var statusCheck = true.obs;
-  // var statuscek = false.obs;
 
   void stateAktivitas(Homepage data) {
     statusCheck.value = data.status;

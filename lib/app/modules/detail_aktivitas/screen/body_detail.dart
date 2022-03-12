@@ -1,12 +1,13 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../values/colors.dart';
 import '../controllers/detail_aktivitas_controller.dart';
 import '../views/list_sub_aktivitas.dart';
 import '../widget/add_sub_aktivitas.dart';
 import '../widget/detail_body.dart';
-import '../widget/kategori.dart';
+import '../widget/list_kategori.dart';
 import '../widget/tanggal_button.dart';
 import '../widget/text_field.dart';
 import '../widget/title.dart';
@@ -114,5 +115,31 @@ class BodyDetailAktivitas extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget listKategoriIndex(String tittle, int index) {
+    return Container(
+        child: Obx(
+      () => ElevatedButton(
+        onPressed: () {
+          controller.selectedKategori.value = index;
+          controller.kategoricontroller = tittle;
+        },
+        style: ElevatedButton.styleFrom(
+            side: BorderSide(color: MyColors.blue),
+            shadowColor: Colors.white,
+            primary: controller.selectedKategori.value == index
+                ? MyColors.blue
+                : Colors.white),
+        child: Text(
+          tittle,
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: controller.selectedKategori.value == index
+                  ? Colors.white
+                  : MyColors.black),
+        ),
+      ),
+    ));
   }
 }
