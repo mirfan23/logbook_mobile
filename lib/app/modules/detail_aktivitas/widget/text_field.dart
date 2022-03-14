@@ -4,15 +4,6 @@ import 'package:logbook_mobile_app/app/modules/detail_aktivitas/controllers/deta
 import '../../values/colors.dart';
 
 class CustomTextFieldWidget extends GetView<DetailAktivitasController> {
-  const CustomTextFieldWidget({
-    Key? key,
-    // required this.controller,
-    // required this.realita,
-  }) : super(key: key);
-
-  // final DetailAktivitasController controller;
-  // final TextEditingController realita;
-
   @override
   Widget build(BuildContext context) {
     return TextField(

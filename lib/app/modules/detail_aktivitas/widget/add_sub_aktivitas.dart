@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../values/colors.dart';
 import '../controllers/detail_aktivitas_controller.dart';
 
-class ButtonAddSubAktivitasWidget extends StatelessWidget {
-  const ButtonAddSubAktivitasWidget({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
-
-  final DetailAktivitasController controller;
-
+class ButtonAddSubAktivitasWidget extends GetView<DetailAktivitasController> {
   @override
   Widget build(BuildContext context) {
     var addSubAktivitasController = TextEditingController();
@@ -66,8 +60,7 @@ class ButtonAddSubAktivitasWidget extends StatelessWidget {
                                 borderSide: BorderSide.none),
                             fillColor: MyColors.white2),
                         style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: MyColors.darkGrey),
+                            fontWeight: FontWeight.w600, color: MyColors.black),
                       ),
                     ),
                     Container(

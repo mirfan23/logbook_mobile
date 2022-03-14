@@ -5,16 +5,7 @@ import 'package:intl/intl.dart';
 import '../../values/colors.dart';
 import '../controllers/detail_aktivitas_controller.dart';
 
-class TanggalButton extends StatelessWidget {
-  const TanggalButton({
-    Key? key,
-    required this.controller,
-    // required this.tanggal,
-  }) : super(key: key);
-
-  final DetailAktivitasController controller;
-  // final TextEditingController tanggal;
-
+class TanggalButton extends GetView<DetailAktivitasController> {
   @override
   Widget build(BuildContext context) {
     return Container(

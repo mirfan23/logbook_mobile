@@ -29,10 +29,7 @@ class BulanView extends GetView<HomeController> {
                   SizedBox(
                     height: 20,
                   ),
-                  Aktivitas(
-                    deviceWidth: deviceWidth,
-                    controller: controller,
-                  ),
+                  Aktivitas(),
                 ],
               ),
             ),

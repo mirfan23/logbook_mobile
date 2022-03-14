@@ -5,13 +5,12 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:logbook_mobile_app/app/modules/home/controllers/home_controller.dart';
 import 'package:logbook_mobile_app/app/modules/home/home_model.dart';
-
 import '../../home/provider/home_provider.dart';
 import '../detail_aktivitas_model.dart';
 
 class DetailAktivitasController extends GetxController with StateMixin {
   var listSubAktivitas = List<DetailAktivitasModel>.empty().obs;
-  var listAktivitas = List<Homepage>.empty().obs;
+
   var homepageC = Get.put(HomeController());
 
   RxBool listCheckSubAktivitas = false.obs;
@@ -50,6 +49,12 @@ class DetailAktivitasController extends GetxController with StateMixin {
     "Learn",
     "Report",
     "Other",
+  ];
+  final List<String> itemListWaktu = [
+    "Sebelum Dzuhur",
+    "Setelah Dzuhur",
+    "Setelah Ashar",
+    "Overtime",
   ];
 
   late TextEditingController judulcontroller;
@@ -99,13 +104,13 @@ class DetailAktivitasController extends GetxController with StateMixin {
   }
 
   String formatDate(DateTime date) {
-    var formatDate = DateFormat("EEEE, d MMMM yyyy", "id_ID");
+    var formatDate = DateFormat("EEEE, d MMMM yyyy");
     return formatDate.format(date);
   }
 
-  void addAktivitas() {
+  void addAktivitas(String name) {
     var aktivitas = Homepage(
-        id: (homepageC.listAktivitas.length + 1).toString(),
+        id: name,
         status: false,
         target: judulcontroller.text,
         realita: realitacontroller.text,
@@ -130,64 +135,30 @@ class DetailAktivitasController extends GetxController with StateMixin {
   void stateSubAktivitas(DetailAktivitasModel data) {
     dataCheck = data.status.obs;
     dataCheck.toggle();
+    data.status = dataCheck.value;
     if (dataCheck.isTrue) {
       subaktivitascontroller = data.tittle.toString();
+    } else {
+      subaktivitascontroller = "";
     }
-    data.status = dataCheck.value;
     print(data.tittle + " = " + data.status.toString());
     change(dataCheck.value, status: RxStatus.success());
   }
 
-  // void changeTargetToggle() {
-  //   onTarget.toggle();
-  //   print("onTarget : " + onTarget.toString());
-  // }
-
-  // void changeConceptState() {
-  //   onConcept.toggle();
-  //   if (onConcept.isTrue) {
-  //     kategoricontroller = "Concept";
-  //     print("onConcept : " + onConcept.toString());
-  //   }
-  // }
-
-  // void changeDesignState() {
-  //   onDesign.toggle();
-  //   if (onDesign.isTrue) {
-  //     kategoricontroller = "Design";
-  //     print("onDesign : " + onDesign.toString());
-  //   }
-  // }
-
-  // void changeDiscussState() {
-  //   onDiscuss.toggle();
-  //   if (onDiscuss.isTrue) {
-  //     kategoricontroller = "Discuss";
-  //     print("onDiscuss : " + onDiscuss.toString());
-  //   }
-  // }
-
-  // void changeLearntState() {
-  //   onLearn.toggle();
-  //   if (onLearn.isTrue) {
-  //     kategoricontroller = "Learn";
-  //     print("onLearn : " + onLearn.toString());
-  //   }
-  // }
-
-  // void changeReportState() {
-  //   onReport.toggle();
-  //   if (onReport.isTrue) {
-  //     kategoricontroller = "Report";
-  //     print("onReport : " + onReport.toString());
-  //   }
-  // }
-
-  // void changeOtherState() {
-  //   onOther.toggle();
-  //   if (onOther.isTrue) {
-  //     kategoricontroller = "Other";
-  //     print("onOther : " + onOther.toString());
-  //   }
-  // }
+  var homeP = Get.put(HomeProvider());
+  void addAktivitases() {
+    try {
+      homeP
+          .saveAktivitas(
+            formatDate(initialDate.value).toString(),
+            judulcontroller.text,
+            kategoricontroller.toString(),
+            realitacontroller.text,
+            waktucontroller.toString(),
+          )
+          .then((value) => addAktivitas(value.name));
+    } catch (err) {
+      throw err.toString();
+    }
+  }
 }

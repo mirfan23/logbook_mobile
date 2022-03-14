@@ -13,15 +13,12 @@ import '../controllers/home_controller.dart';
 class Aktivitas extends GetView<HomeController> {
   Aktivitas({
     Key? key,
-    required double deviceWidth,
-    required HomeController controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
-    return Obx(() {
-      print(controller.listData.length);
+    return controller.obx((data) {
       return controller.listData.isEmpty
           ? Container(
               width: deviceWidth,
@@ -42,7 +39,7 @@ class Aktivitas extends GetView<HomeController> {
                 );
               },
               itemCount: controller.listData.length);
-    });
+    }, onLoading: CircularProgressIndicator());
   }
 }
 

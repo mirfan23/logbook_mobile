@@ -15,7 +15,6 @@ class AktivitasBody extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Colors.amber,
       width: deviceWidth,
       child: Row(
         children: [
@@ -25,14 +24,12 @@ class AktivitasBody extends GetView<HomeController> {
             width: 8.0,
           ),
           Obx(() {
-            final listData = controller
-                .getByDate(controller.formatDate(controller.selectedDay.value));
-            return Text(listData.length.toString(),
+            return Text(controller.listData.length.toString(),
                 style: TextStyle(
                     color: MyColors.amber,
                     fontWeight: FontWeight.w500,
                     fontSize: 18));
-          })
+          }),
         ],
       ),
     );

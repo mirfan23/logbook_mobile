@@ -1,6 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logbook_mobile_app/app/modules/detail_aktivitas/widget/waktu_detail.dart';
 
 import '../../values/colors.dart';
 import '../controllers/detail_aktivitas_controller.dart';
@@ -12,29 +13,7 @@ import '../widget/tanggal_button.dart';
 import '../widget/text_field.dart';
 import '../widget/title.dart';
 
-class BodyDetailAktivitas extends StatelessWidget {
-  BodyDetailAktivitas({
-    Key? key,
-    required this.controller,
-    // required this.target,
-    // required this.realita,
-    // required this.kategori,
-    // required this.tanggal,
-  }) : super(key: key);
-
-  // final TextEditingController target;
-  // final TextEditingController realita;
-  // final TextEditingController kategori;
-  // final TextEditingController tanggal;
-
-  final DetailAktivitasController controller;
-  final List<String> itemListWaktu = [
-    "Sebelum Dzuhur",
-    "Setelah Dzuhur",
-    "Setelah Ashar",
-    "Overtime",
-  ];
-
+class BodyDetailAktivitas extends GetView<DetailAktivitasController> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -68,10 +47,8 @@ class BodyDetailAktivitas extends StatelessWidget {
             height: 20,
           ),
           Tittle(tittle: "Sub-Aktivitas"),
-          ListDataSubAktivitas(
-            controller: controller,
-          ),
-          ButtonAddSubAktivitasWidget(controller: controller),
+          ListDataSubAktivitas(),
+          ButtonAddSubAktivitasWidget(),
           SizedBox(
             height: 10,
           ),
@@ -81,35 +58,11 @@ class BodyDetailAktivitas extends StatelessWidget {
           ),
           Column(
             children: [
-              // WaktuButtonDetailAktivitasScreen(controller: controller),
-              DropdownSearch<String>(
-                mode: Mode.DIALOG,
-                maxHeight: 225,
-                dropdownSearchTextAlignVertical: TextAlignVertical.center,
-                showSelectedItem: true,
-                items: itemListWaktu,
-                selectedItem: "Pilih waktu...",
-                hint: "Pilih waktu...",
-                onChanged: (value) {
-                  controller.waktucontroller = value.toString();
-                },
-                showAsSuffixIcons: false,
-                dropdownSearchDecoration: InputDecoration(
-                    hoverColor: MyColors.blue,
-                    fillColor: Colors.red,
-                    contentPadding:
-                        EdgeInsets.only(top: 3, bottom: 3, left: 20, right: 5),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(color: MyColors.blue))),
-              ),
+              WaktuDetialAktivitasWidget(),
               SizedBox(
                 height: 10,
               ),
-              TanggalButton(
-                controller: controller,
-                // tanggal: tanggal,
-              ),
+              TanggalButton(),
             ],
           )
         ],
@@ -127,16 +80,16 @@ class BodyDetailAktivitas extends StatelessWidget {
         },
         style: ElevatedButton.styleFrom(
             side: BorderSide(color: MyColors.blue),
-            shadowColor: Colors.white,
+            shadowColor: MyColors.white,
             primary: controller.selectedKategori.value == index
                 ? MyColors.blue
-                : Colors.white),
+                : MyColors.white),
         child: Text(
           tittle,
           style: TextStyle(
               fontWeight: FontWeight.bold,
               color: controller.selectedKategori.value == index
-                  ? Colors.white
+                  ? MyColors.white
                   : MyColors.black),
         ),
       ),
