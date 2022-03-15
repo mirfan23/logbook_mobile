@@ -9,10 +9,12 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const DETAIL_AKTIVITAS = _Paths.DETAIL_AKTIVITAS;
   static const KATEGORI = _Paths.KATEGORI;
+  static const EDIT_AKTIVITAS = _Paths.EDIT_AKTIVITAS;
 }
 
 abstract class _Paths {
   static const HOME = '/home';
   static const DETAIL_AKTIVITAS = '/detail-aktivitas';
   static const KATEGORI = '/kategori';
+  static const EDIT_AKTIVITAS = '/edit-aktivitas';
 }

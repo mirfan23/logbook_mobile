@@ -10,6 +10,7 @@ class MyColors {
   static Color amber = Color.fromARGB(255, 255, 189, 20);
   static Color black = Color.fromARGB(255, 0, 0, 0);
   static Color verylightgreen = Color.fromARGB(255, 205, 240, 202);
+  static Color red = Color.fromARGB(255, 244, 67, 54);
   static List<Color> myListKategoriColor = [
     Color.fromARGB(255, 205, 240, 202),
     Color.fromARGB(255, 255, 244, 150),

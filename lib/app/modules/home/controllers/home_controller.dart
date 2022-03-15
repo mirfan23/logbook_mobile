@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, unnecessary_null_comparison
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -42,6 +42,9 @@ class HomeController extends GetxController with StateMixin<List<Homepage>> {
   List<Homepage> getDataByDate(String date) {
     change(listAktivitas.where((element) => element.tanggal == date).toList(),
         status: RxStatus.success());
+    // print(listAktivitas[
+    //         listAktivitas.indexWhere((element) => element.tanggal == date)]
+    //     .tanggal);
     return listAktivitas.where((element) => element.tanggal == date).toList();
   }
 
@@ -79,6 +82,7 @@ class HomeController extends GetxController with StateMixin<List<Homepage>> {
               }
               change(listData, status: RxStatus.success());
             }
+            print(formatDate(selectedDay.value));
             listData.value = getDataByDate(formatDate(DateTime.now()));
           }
         },

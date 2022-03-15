@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:logbook_mobile_app/app/modules/home/home_model.dart';
+import 'package:logbook_mobile_app/app/routes/app_pages.dart';
 
 import '../../values/colors.dart';
 import '../controllers/home_controller.dart';
@@ -57,10 +58,13 @@ class SlidableWidget extends GetView<HomeController> {
     return Slidable(
       endActionPane: ActionPane(motion: ScrollMotion(), children: [
         SlidableAction(
-          onPressed: (context) {},
+          onPressed: (context) {
+            print(data.id);
+            Get.toNamed(AppPages.INITIAL_D, arguments: data.id);
+          },
           icon: Icons.edit,
-          backgroundColor: Colors.amber,
-          foregroundColor: Colors.white,
+          backgroundColor: MyColors.amber,
+          foregroundColor: MyColors.white,
           label: "Edit",
         ),
         SlidableAction(
@@ -69,8 +73,8 @@ class SlidableWidget extends GetView<HomeController> {
             controller.deleteAktivitas(data.id);
           },
           icon: Icons.delete,
-          backgroundColor: Colors.red,
-          foregroundColor: Colors.white,
+          backgroundColor: MyColors.red,
+          foregroundColor: MyColors.white,
           label: "Delete",
         ),
       ]),
