@@ -20,7 +20,7 @@ class Aktivitas extends GetView<HomeController> {
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     return controller.obx((data) {
-      return controller.listData.isEmpty
+      return data!.isEmpty
           ? Container(
               width: deviceWidth,
               child: Image(image: AssetImage("assets/images/kosong.png")),
@@ -30,7 +30,7 @@ class Aktivitas extends GetView<HomeController> {
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return SlidableWidget(
-                  data: controller.listData[index],
+                  data: data[index],
                   indexData: index,
                 );
               },
@@ -39,7 +39,7 @@ class Aktivitas extends GetView<HomeController> {
                   height: 10,
                 );
               },
-              itemCount: controller.listData.length);
+              itemCount: data.length);
     }, onLoading: CircularProgressIndicator());
   }
 }

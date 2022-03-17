@@ -112,7 +112,7 @@ class DetailAktivitasController extends GetxController with StateMixin {
       tanggal: formatDate(initialDate.value).toString(),
     );
     homepageC.listAktivitas.add(aktivitas);
-    homepageC.listData.value = homepageC.getDataByDate(
+    homepageC.getDataByDate(
       formatDate(homepageC.selectedDay.value),
     );
     change("success", status: RxStatus.success());

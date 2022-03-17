@@ -48,17 +48,17 @@ class HomeController extends GetxController with StateMixin<List<Homepage>> {
     return formatDate.format(date);
   }
 
-  List<Homepage> getDataByDate(String date) {
-    change(listAktivitas.where((element) => element.tanggal == date).toList(),
-        status: RxStatus.success());
-    return listAktivitas.where((element) => element.tanggal == date).toList();
+  void getDataByDate(String date) {
+    var data =
+        listAktivitas.where((element) => element.tanggal == date).toList();
+    change(data, status: RxStatus.success());
   }
 
-  List<Homepage> getDataByStatus(bool status, String date) {
-    print(status);
-    return listAktivitas
+  void getDataByStatus(bool status, String date) {
+    var data = listAktivitas
         .where((element) => element.status == status && element.tanggal == date)
         .toList();
+    change(data, status: RxStatus.success());
   }
 
   HomeProvider homepageProvider = Get.put(HomeProvider());

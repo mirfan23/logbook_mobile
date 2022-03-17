@@ -23,13 +23,14 @@ class AktivitasBody extends GetView<HomeController> {
           SizedBox(
             width: 8.0,
           ),
-          Obx(() {
-            return Text(controller.listData.length.toString(),
+          controller.obx((data) {
+            return Text(data!.length.toString(),
                 style: TextStyle(
-                    color: MyColors.amber,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18));
-          }),
+                  color: MyColors.amber,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                ));
+          })
         ],
       ),
     );
