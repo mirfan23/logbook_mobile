@@ -66,7 +66,8 @@ class _ShowCalendarState extends State<ShowCalendar> {
           setState(() {
             controller.selectedDay.value = selectedDay;
             controller.focusedDay;
-            controller.formatDate(controller.selectedDay.value);
+            controller.getDataByDate(
+                controller.formatDate(controller.selectedDay.value));
           });
         }
       },

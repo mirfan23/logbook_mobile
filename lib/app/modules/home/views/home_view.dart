@@ -40,7 +40,7 @@ class HomeView extends GetView<HomeController> {
         bottomNavigationBar: Padding(
           padding: EdgeInsets.all(10),
           child: MaterialButton(
-              height: bodyHeight * 0.1,
+              height: bodyHeight * 0.09,
               color: MyColors.blue,
               onPressed: () {
                 Get.toNamed(AppPages.INITIAL_D);
