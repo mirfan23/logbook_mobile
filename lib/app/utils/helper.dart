@@ -29,3 +29,23 @@ class MyHelper {
     centerTitle: true,
   );
 }
+
+class WidgetLoading extends StatelessWidget {
+  const WidgetLoading({
+    required this.height,
+  });
+
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      width: double.infinity,
+      height: height,
+      decoration: BoxDecoration(
+          color: MyColors.white2, borderRadius: BorderRadius.circular(5)),
+      child: Stack(children: [CircularProgressIndicator()]),
+    );
+  }
+}

@@ -60,7 +60,9 @@ class SlidableWidget extends GetView<HomeController> {
         SlidableAction(
           onPressed: (context) {
             print(data.id);
-            Get.toNamed(AppPages.INITIAL_D, arguments: data.id);
+            Get.toNamed(AppPages.INITIAL_D, arguments: [
+              {"edit": true, "id": data.id}
+            ]);
           },
           icon: Icons.edit,
           backgroundColor: MyColors.amber,

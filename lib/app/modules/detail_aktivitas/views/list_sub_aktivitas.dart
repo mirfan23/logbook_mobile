@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logbook_mobile_app/app/utils/helper.dart';
 
 import '../controllers/detail_aktivitas_controller.dart';
 import 'sub_aktivitas_widget.dart';
@@ -9,7 +10,7 @@ class ListDataSubAktivitas extends GetView<DetailAktivitasController> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      child: Obx(() {
+      child: controller.obx((_) {
         return controller.listSubAktivitas.isEmpty
             ? Container()
             : ListView.builder(
@@ -24,7 +25,7 @@ class ListDataSubAktivitas extends GetView<DetailAktivitasController> {
                   );
                 },
               );
-      }),
+      }, onLoading: WidgetLoading(height: 100)),
     );
   }
 }

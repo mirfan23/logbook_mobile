@@ -21,17 +21,17 @@ class DetailAktivitasView extends GetView<DetailAktivitasController> {
         borderRadius: 5,
         textColor: Colors.white,
         onPressed: () {
-          if (Get.arguments == null) {
+          if (Get.arguments[0]["edit"]) {
+            controller.updateLogBook(Get.arguments[0]["id"]);
+          } else {
             if (controller.checkValueIsValid()) {
               controller.addAktivitases();
               Get.offAllNamed(AppPages.INITIAL);
             } else {
               print("Data harus terisi semua!");
             }
-          } else {
-            controller.updateLogBook(Get.arguments);
-            Get.offAllNamed(AppPages.INITIAL);
           }
+          Get.offAllNamed(AppPages.INITIAL);
         },
       ),
       body: BodyDetailAktivitas(),

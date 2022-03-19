@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logbook_mobile_app/app/modules/detail_aktivitas/controllers/detail_aktivitas_controller.dart';
+import 'package:logbook_mobile_app/app/utils/helper.dart';
 
 import '../../values/colors.dart';
 
@@ -25,21 +26,22 @@ class DetailBody extends GetView<DetailAktivitasController> {
           width: 15,
         ),
         Expanded(
-          child: TextField(
-            controller: controller.judulcontroller,
-            decoration: InputDecoration(
-                hintText: "Judul",
-                hintStyle: TextStyle(color: MyColors.grey),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                filled: true,
-                fillColor: MyColors.white2,
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide.none)),
-            // controller: target,]
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-          ),
+          child: controller.obx(
+              (_) => TextField(
+                    controller: controller.judulcontroller,
+                    decoration: InputDecoration(
+                        hintText: "Judul",
+                        hintStyle: TextStyle(color: MyColors.grey),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                        filled: true,
+                        fillColor: MyColors.white2,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide: BorderSide.none)),
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+              onLoading: WidgetLoading(height: 50)),
         )
       ],
     );

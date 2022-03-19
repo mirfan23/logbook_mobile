@@ -43,7 +43,9 @@ class HomeView extends GetView<HomeController> {
               height: bodyHeight * 0.09,
               color: MyColors.blue,
               onPressed: () {
-                Get.toNamed(AppPages.INITIAL_D);
+                Get.toNamed(AppPages.INITIAL_D, arguments: [
+                  {"edit": false}
+                ]);
               },
               child: Text("+ Tambah Aktivitas",
                   style: TextStyle(color: MyColors.white, fontSize: 20))),

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logbook_mobile_app/app/modules/values/colors.dart';
+import 'package:logbook_mobile_app/app/utils/helper.dart';
 
 import '../controllers/detail_aktivitas_controller.dart';
 
@@ -13,15 +14,17 @@ class ListKategori extends GetView<DetailAktivitasController> {
         List.generate(controller.listKategori.length, (int index) {
       return listKategoriIndex(controller.listKategori[index], index + 1);
     });
-    return GridView.count(
-        primary: false,
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        childAspectRatio: 2 / .7,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        crossAxisCount: 3,
-        children: listKategoriCard);
+    return controller.obx(
+        (_) => GridView.count(
+            primary: false,
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            childAspectRatio: 2 / .7,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            crossAxisCount: 3,
+            children: listKategoriCard),
+        onLoading: WidgetLoading(height: 100));
   }
 
   Widget listKategoriIndex(String title, int index) {

@@ -80,7 +80,11 @@ class DetailAktivitasController extends GetxController with StateMixin {
       listSubAktivitas.add(subAktivitas);
     }
     if (Get.arguments != null) {
-      showEditAktivitas(Get.arguments);
+      if (Get.arguments[0]["edit"]) {
+        showEditAktivitas();
+      } else {
+        change(null, status: RxStatus.success());
+      }
     }
   }
 
@@ -171,7 +175,7 @@ class DetailAktivitasController extends GetxController with StateMixin {
     }
   }
 
-  void showEditAktivitas(String id) {
+  void showEditAktivitas() {
     try {
       DetailP.showLogBook(id).then(
         (response) {
